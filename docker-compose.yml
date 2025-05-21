@@ -1,13 +1,1 @@
-version: '3'
-
-services:
-  mcp-server:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - GITHUB_TOKEN=${GITHUB_TOKEN}
-      - PORT=3000
-    restart: unless-stopped
-    volumes:
-      - ./logs:/usr/src/app/logs
+dmVyc2lvbjogJzMuOCcNCg0Kc2VydmljZXM6DQogIG1jcC1zZXJ2ZXI6DQogICAgYnVpbGQ6IC4NCiAgICBpbWFnZTogbWNwLXNlcnZlcjpsYXRlc3QNCiAgICBjb250YWluZXJfbmFtZTogbWNwLXNlcnZlcg0KICAgIHBvcnRzOg0KICAgICAgLSAiMzAwMDozMDAwIg0KICAgIGVudmlyb25tZW50Og0KICAgICAgLSBOT0RFX0VOVj1wcm9kdWN0aW9uDQogICAgICAtIEdJVEhVQl9UT0tFTj1naHBfM1oyYVJBdGFIMHBKcGtDY1dKem1vVGtUUDJvWWF4MFpTRjM1DQogICAgdm9sdW1lczoNCiAgICAgIC0gLi9sb2dzOi91c3Ivc3JjL2FwcC9sb2dzDQogICAgcmVzdGFydDogdW5sZXNzLXN0b3BwZWQ=
