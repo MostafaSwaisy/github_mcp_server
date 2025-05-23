@@ -1,13 +1,15 @@
-version: '3'
+version: '3.8'
 
 services:
   mcp-server:
     build: .
+    image: mcp-server:latest
+    container_name: mcp-server
     ports:
       - "3000:3000"
     environment:
-      - GITHUB_TOKEN=${GITHUB_TOKEN}
-      - PORT=3000
-    restart: unless-stopped
+      - NODE_ENV=production
+      - GITHUB_TOKEN=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
     volumes:
       - ./logs:/usr/src/app/logs
+    restart: unless-stopped

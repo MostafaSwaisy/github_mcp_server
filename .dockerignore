@@ -1,7 +1,11 @@
 node_modules
 npm-debug.log
+.env
 .git
 .gitignore
+*.log
 logs/
+.vscode/
+.cursor/
 README.md
 
