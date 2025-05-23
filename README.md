@@ -1,198 +1,122 @@
-# GitHub MCP Server
+# 🚀 GitHub MCP Server
 
-A Model Context Protocol (MCP) server implementation with comprehensive GitHub integration for Cursor IDE. This server provides a robust API for managing code contexts and performing GitHub operations.
+> A powerful Model Context Protocol server that seamlessly integrates with GitHub, making your Cursor IDE experience smoother than ever.
 
-## Features
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/MostafaSwaisy/github_mcp_server/blob/main/LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://github.com/MostafaSwaisy/github_mcp_server/blob/main/docker-compose.yml)
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?logo=node.js)](https://nodejs.org)
 
-- **MCP Protocol Support**: Full implementation of the Model Context Protocol
-- **GitHub Integration**: Comprehensive GitHub API integration
-- **Bulk Operations**: Support for multi-file operations in single commits
-- **Docker Support**: Ready to run in containers
-- **Automatic Content Handling**: Built-in content encoding/decoding
-- **Error Handling**: Comprehensive error handling and logging
-- **Health Monitoring**: Built-in health check endpoint
+## ✨ Why Choose This Server?
 
-## Quick Start
+- 🔄 **Seamless GitHub Integration** - Push, pull, and manage your code with zero friction
+- 🎯 **Built for Cursor IDE** - Perfect companion for your favorite IDE
+- 🛡️ **Rock-solid Reliability** - Enterprise-grade error handling and logging
+- 🐳 **Docker Ready** - Deploy anywhere in seconds
+- 🔍 **Smart Context Management** - Efficient code organization and search
+- 🚦 **Health Monitoring** - Always know your server's status
 
-### Using Docker
+## 🚀 Quick Start
 
-1. Build the image:
-   ```bash
-   docker build -t mcp-server .
-   ```
+### 🐳 Using Docker (Recommended)
 
-2. Run with Docker Compose:
-   ```bash
-   docker-compose up -d
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/MostafaSwaisy/github_mcp_server.git
 
-### Manual Setup
+# Navigate to the project
+cd github_mcp_server
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+# Start with Docker Compose
+docker-compose up -d
+```
 
-2. Set up environment variables:
-   ```bash
-   GITHUB_TOKEN=your_github_token
-   NODE_ENV=production
-   PORT=3000
-   ```
+That's it! Your server is running at http://localhost:3000 🎉
 
-3. Start the server:
-   ```bash
-   npm start
-   ```
+### 🛠️ Manual Setup
 
-## API Documentation
+```bash
+# Install dependencies
+npm install
 
-### MCP Protocol Endpoints
+# Set your GitHub token
+export GITHUB_TOKEN=your_github_token
 
-#### Context Management
+# Start the server
+npm start
+```
 
-- **Initialize Context**
-  ```http
-  POST /v1/init
-  ```
-  Creates a new context for managing files and operations.
+## 🎯 Key Features
 
-- **Add File to Context**
-  ```http
-  POST /v1/add_file
-  Content-Type: application/json
+### 🔗 GitHub Integration
+- Create and manage repositories
+- Handle multiple files in single commits
+- Manage branches and pull requests
+- Access repository content seamlessly
 
-  {
-    "context_id": "ctx_123",
-    "path": "file.txt",
-    "content": "file content",
-    "repo": "optional_repo_name",
-    "branch": "optional_branch_name"
-  }
-  ```
+### 📦 Context Management
+- Create and manage code contexts
+- Add/remove files from contexts
+- Search within contexts
+- Bulk operations support
 
-- **Remove File from Context**
-  ```http
-  POST /v1/remove_file
-  Content-Type: application/json
+### 🛡️ Enterprise Ready
+- Comprehensive error handling
+- Detailed logging system
+- Health monitoring
+- Docker support with auto-restart
 
-  {
-    "context_id": "ctx_123",
-    "path": "file.txt"
-  }
-  ```
+## 🔌 API Examples
 
-- **Get Context**
-  ```http
-  GET /v1/get_context?context_id=ctx_123
-  ```
+### Create a New Context
+```http
+POST /v1/init
+```
 
-- **Search in Context**
-  ```http
-  POST /v1/search
-  Content-Type: application/json
+### Push Multiple Files
+```http
+POST /v1/push_files
+Content-Type: application/json
 
-  {
-    "context_id": "ctx_123",
-    "query": "search term"
-  }
-  ```
-
-#### GitHub Operations
-
-- **Push Multiple Files**
-  ```http
-  POST /v1/push_files
-  Content-Type: application/json
-
-  {
-    "repoName": "repo_name",
-    "branch": "main",
-    "files": [
-      {
-        "path": "file1.txt",
-        "content": "content1"
-      },
-      {
-        "path": "file2.txt",
-        "content": "content2"
-      }
-    ],
-    "message": "Commit message"
-  }
-  ```
-
-- **Get Files from GitHub**
-  ```http
-  POST /v1/github_files
-  Content-Type: application/json
-
-  {
-    "repo": "repo_name",
-    "branch": "main",
-    "path": "optional/path"
-  }
-  ```
-
-### GitHub Management Endpoints
-
-- **List Repositories**
-  ```http
-  GET /repos
-  ```
-
-- **Create Repository**
-  ```http
-  POST /repo
-  Content-Type: application/json
-
-  {
-    "repoName": "new_repo",
-    "description": "Repository description",
-    "private": true
-  }
-  ```
-
-- **Branch Operations**
-  ```http
-  POST /branch    # Create branch
-  DELETE /branch  # Delete branch
-  GET /branch     # Get branch info
-  ```
-
-- **Pull Request Operations**
-  ```http
-  POST /pullrequest        # Create PR
-  POST /pullrequest/merge  # Merge PR
-  ```
-
-- **File Operations**
-  ```http
-  PUT /commit   # Commit file
-  GET /readme   # Get README
-  GET /files    # List files
-  GET /commits  # List commits
-  ```
-
-## Error Handling
-
-The server provides detailed error responses in the following format:
-```json
 {
-  "error": "Error description",
-  "details": "Detailed error information"
+  "repoName": "awesome-project",
+  "branch": "main",
+  "files": [
+    {
+      "path": "src/app.js",
+      "content": "console.log('Hello, World!');"
+    }
+  ],
+  "message": "Add main application file"
 }
 ```
 
-## Health Check
-
-Monitor server health using:
+### Search in Context
 ```http
-GET /health
+POST /v1/search
+Content-Type: application/json
+
+{
+  "context_id": "ctx_123",
+  "query": "function main"
+}
 ```
 
+## 🔧 Configuration
+
+### Environment Variables
+```env
+GITHUB_TOKEN=your_github_token    # Required
+NODE_ENV=production              # Optional (default: development)
+PORT=3000                       # Optional (default: 3000)
+```
+
+## 📊 Health Monitoring
+
+Check server status:
+```http
+GET /health
+
 Response:
-```json
 {
   "status": "healthy",
   "github_token": true,
@@ -200,23 +124,23 @@ Response:
 }
 ```
 
-## Docker Support
+## 🤝 Contributing
 
-The server includes Docker support with:
-- Multi-stage builds
-- Volume support for logs
-- Environment variable configuration
-- Health checks
-- Automatic restart capability
+We love contributions! Here's how you can help:
 
-## Contributing
+1. 🍴 Fork the repository
+2. 🌿 Create your feature branch
+3. 💻 Make your changes
+4. 🚀 Push to your branch
+5. 📬 Open a Pull Request
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+## 📝 License
 
-## License
+This project is licensed under the MIT License - making it perfect for both personal and commercial use.
 
-MIT License
+## 🌟 Support
+
+Love this project? Give it a star ⭐️ on GitHub!
+
+---
+Made with ❤️ for the Cursor IDE community
